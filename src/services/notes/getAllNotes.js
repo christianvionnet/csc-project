@@ -1,10 +1,7 @@
-import axios from "axios";
+import Axios from "axios";
 
 export const getAllNotes = () => {
-  return axios
-    .get("https://jsonplaceholder.typicode.com/posts")
-    .then((response) => {
-      const { data } = response;
-      return data;
-    });
+  return Axios.get("http://localhost:3001/api/notes").then((response) => {
+    console.log(response.data);
+  });
 };

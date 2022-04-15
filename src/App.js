@@ -1,12 +1,17 @@
 import React from "react";
-// import GetData from "./helpers/GetData";
+import Footer from "./components/Footer";
+import GetJobs from "./components/GetJobs";
+import Header from "./components/Header";
 import PostForm from "./components/PostForm";
 
 function App() {
   return (
     <>
+      <Header />
+      <hr />
+      <GetJobs />
       <PostForm />
-      {/* <GetData /> */}
+      <Footer />
     </>
   );
 }

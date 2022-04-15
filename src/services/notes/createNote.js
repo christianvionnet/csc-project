@@ -1,11 +1,11 @@
-import axios from "axios";
+import Axios from "axios";
 
 export const createNote = (info) => {
-  console.log(info);
-  return axios
-    .post("https://jsonplaceholder.typicode.com/posts", { info })
-    .then((response) => {
-      const { data } = response;
-      return data;
-    });
+  return Axios.post(url, {
+    name: info.name,
+    data: info.data,
+  }).then((response) => {
+    setSentData(response.data);
+    console.log(response.data);
+  });
 };
