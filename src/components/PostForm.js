@@ -2,19 +2,23 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import "./PostForm.css";
+import Header from "./Header";
+import GetJobs from "./GetJobs";
+import loginService from "../services/notes/login";
+import noteService from "../services/notes/notes";
 
 const PostForm = () => {
   const url = "http://localhost:3001/api/notes";
-  // const statusUrl = "http://localhost:3001/api/notes?status=";
 
   const initialInfo = { name: "", data: "" };
   const [info, setInfo] = useState(initialInfo);
   const [infos, setInfos] = useState([]);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  // const [status, setStatus] = useState(null);
-  // const [infoGet, setInfoGet] = useState({});
-  // const [sentData, setSentData] = useState({});
+
+  const [user, setUser] = useState(null);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleInfo = (e) => {
     const newInfo = { ...info };
@@ -34,7 +38,6 @@ const PostForm = () => {
       name: info.name,
       data: info.data,
     }).then((response) => {
-      // setSentData(response.data);
       console.log(response.data);
     });
     setInfos([...infos, info]);
@@ -48,7 +51,6 @@ const PostForm = () => {
 
   const getInfo = () => {
     Axios.get("http://localhost:3001/api/notes").then((response) => {
-      // setInfoGet(response.data);
       console.log(response.data);
     });
   };
@@ -57,9 +59,54 @@ const PostForm = () => {
     getInfo();
   }, []);
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const user = await loginService.login({
+        username,
+        password,
+      });
+
+      window.localStorage.setItem("loggedNoteAppUser", JSON.stringify(user));
+
+      noteService.setToken(user.token);
+
+      setUser(user);
+      setUsername("");
+      setPassword("");
+    } catch (error) {
+      console.log(error);
+    }
+    // loginService;
+    console.log("SUBMIT");
+  };
+
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem("loggedNoteAppUser");
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON);
+      setUser(user);
+      noteService.setToken(user.token);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    setUser(null);
+    noteService.setToken(user.token);
+    window.localStorage.removeItem("loggedNoteAppUser");
+  };
+
+  const handlePasswordChange = () => {};
+  const handleUsernameChange = () => {};
+
   return (
     <>
-      <div className="container">
+      <div className="">
+        <Header />
+        <hr />
+        <GetJobs />
+
         <div className="row">
           <div className="col-6">
             <h2 className="text-center">Add a new Job</h2>

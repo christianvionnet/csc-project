@@ -7,9 +7,6 @@ import PostForm from "./components/PostForm";
 function App() {
   return (
     <>
-      <Header />
-      <hr />
-      <GetJobs />
       <PostForm />
       <Footer />
     </>

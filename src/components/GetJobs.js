@@ -8,9 +8,9 @@ const GetJobs = () => {
 
   return (
     <div className="container col-8 mb-5">
-      <h1 className="text-center mb-3">Get registers</h1>
+      <h1 className="text-center mb-3 ">Get registers</h1>
       <hr />
-      <div className="d-flex justify-content-center align-items-center">
+      <div className="d-flex justify-content-center align-items-center border p-4">
         <div className="col-6">
           <button className="btn btn-csc mx-2 p-0">
             <a className="link-light nav-link" href={url} target="_blank">

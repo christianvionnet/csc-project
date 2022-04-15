@@ -1,6 +1,8 @@
 import React from "react";
+import LoginForm from "./LoginForm";
 
-const Header = () => {
+const Header = (props) => {
+  console.log("props: ", props);
   return (
     <div className="container mt-3">
       <nav className="d-flex justify-center align-items-center">
@@ -10,6 +12,7 @@ const Header = () => {
           alt="csc-main-logo"
         />
         <h1 className="text-center col-8"> Queue Management</h1>
+        {/* <LoginForm />; */}
       </nav>
     </div>
   );
